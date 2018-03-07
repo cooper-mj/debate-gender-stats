@@ -405,7 +405,7 @@ def main():
 	global rounds
 	names = open_names("namesgenders.csv")
 	#t_file = raw_input("Enter the name of the tournament file to read from: ")
-	tab = read_data("eudc2017s.csv")
+	tab = read_data("wudc2017s.csv")
 	orig_tablen = len(tab)
 	t_name = "EUDC 2017" #raw_input("Enter the name of the tournament (optional): ")
 	tab = update_gender(tab, names)
