@@ -199,14 +199,7 @@ def beta_dist(tab, m_list, f_list, t_name=""):
 
 	prior_women_a = int(len(f_list)*prior_high)
 	prior_women_b = len(f_list)-(prior_women_a)
-	'''
-	print("Prior men a: " + str(prior_men_a))
-	print("Prior men b: " + str(prior_men_b))
-	print("Prior women a: " + str(prior_women_a))
-	print("Prior women b: " + str(prior_women_b))
-	print("Len men: " + str(len(m_list)))
-	print("Len women: " + str(len(f_list)))
-	'''
+
 	posterior_women_a = len([x for x in f_list if x > 80])
 	posterior_women_b = len(f_list) - (posterior_women_a)
 
@@ -317,8 +310,20 @@ def team_points_genders(tab, gender_list):
 	return (MM_team_points, MF_team_points, FF_team_points)
 
 '''
-Assumes that the team points of debaters are normally distributed. Then, plots
-the distributions of MM, MF, and FF teams.
+Function: gender_teams_normal(gender_tup, t_name)
+
+Description: This function takes in a 3-tuple listing team points received
+by MM, FF, and MF teams, as well as the tournament name (tournament name
+used for graph titles only). For each gender permutation, this function
+calculates the mean and variance from the data in the 3-tuple, then outputs
+a chart showing N(mean, variance) for each gender permutation.
+
+Note that use of this function assumes speaker scores are normally distributed;
+this is not always the case, and so while this is one valuable metric, it is
+crucial not to conflate a normal distribution of scores with a chart showing
+the distribution of scores actually achieved by debaters at the tournament.
+
+Returns: None
 '''
 def gender_teams_normal(gender_tup, t_name):
 	import matplotlib.mlab as mlab #not good convention to put it here
@@ -443,8 +448,3 @@ def main():
 
 if __name__ == '__main__':
 	main();
-
-'''
-Use normals to find: 1) Probability speakers score above an 80, 2) Probability that teams break (straights) - 
-for this bit I'll need to calculate how many rounds the tournament is.
-'''

@@ -1,3 +1,4 @@
 TODO:
 
 - Supplement BP version with APDA-compatible version.
+- Supplement normal distributions with line plots of actual speaker scores achieved by members of each gender permutation at the tournament.
