@@ -283,7 +283,19 @@ def gender_split(teams_list, namelist):
 								  # in this system
 	return (MM_teams, MF_teams, FF_teams)
 
-def mean_points_genders(tab, gender_list):
+
+'''
+Function: team_points_genders(tab, gender_list)
+
+Description: Takes in a tuple consisting of a list of MM, FF, and MF teams.
+References the speaker tab to calculate the number of team points received by 
+each team from each gender permutation group. 
+
+Returns: A 3-tuple containing a list of team points received by MM teams,
+FF teams, and MF teams.
+'''
+def team_points_genders(tab, gender_list):
+	
 	MM_team_points = []
 	FF_team_points = []
 	MF_team_points = []
@@ -413,7 +425,7 @@ def main():
 	m_list = (scores_list(tab, 'M'))
 	f_list = (scores_list(tab, 'F'))
 
-	team_gender_points = mean_points_genders(tab, gender_split(tournament_team_list(tab), names))
+	team_gender_points = team_points_genders(tab, gender_split(tournament_team_list(tab), names))
 	basic_info(tab, m_list, f_list, t_name, names, team_gender_points, orig_tablen)
 
 	# plot_performance(tab, m_list, f_list, t_name)
