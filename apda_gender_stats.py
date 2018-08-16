@@ -91,6 +91,27 @@ def median_speaks_by_gender(dataframe):
 
 '''
 Takes in a dataframe of a speaker tab, augmented by gender classification.
+Prints out the mean ranks of male and female speakers at the tournament.
+'''
+def mean_ranks_by_gender(dataframe):
+	male_rows = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Ranks'] != 0)]
+	print("Mean ranks for male competitors: " + str(round(male_rows['Ranks'].mean(), 2)))
+	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Ranks'] != 0)]
+	print("Mean ranks for female competitors: " + str(round(female_rows['Ranks'].mean(), 2)))
+
+'''
+Takes in a dataframe of a speaker tab, augmented by gender classification.
+Prints out the median ranks of male and female speakers at the tournament.
+'''
+def median_ranks_by_gender(dataframe):
+	male_rows = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Ranks'] != 0)]
+	print("Median ranks for male competitors: " + str(round(male_rows['Ranks'].median(), 2)))
+	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Ranks'] != 0)]
+	print("Median ranks for female competitors: " + str(round(female_rows['Ranks'].median(), 2)))
+
+
+'''
+Takes in a dataframe of a speaker tab, augmented by gender classification.
 Uses the bootstrap technique to calculate the probability that the differences
 in speaker scores between male and female speakeres at this tournament was due
 to chance (the p-value). If the p-value is less than 0.05, it indicates that there
@@ -136,6 +157,8 @@ def main(filename):
 	num_competitors_by_gender(df)
 	mean_speaks_by_gender(df)
 	median_speaks_by_gender(df)
+	mean_ranks_by_gender(df)
+	median_ranks_by_gender(df)
 	bootstrap_p_value_speaks(df)
 
 
