@@ -72,44 +72,25 @@ def num_competitors_by_gender(dataframe):
 
 '''
 Takes in a dataframe of a speaker tab, augmented by gender classification.
-Prints out the mean speaks of male and female speakers at the tournament.
+Prints out the mean metric of male and female speakers at the tournament,
+where metric is a member of the set {'Speaks', 'Ranks'}.
 '''
-def mean_speaks_by_gender(dataframe):
+def mean_metric_by_gender(dataframe, metric):
 	male_rows = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Speaks'] != 0)]
-	print("Mean speaker score for male competitors: " + str(round(male_rows['Speaks'].mean(), 2)))
+	print("Mean " + metric.lower() + " for male competitors: " + str(round(male_rows[metric].mean(), 2)))
 	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Speaks'] != 0)]
-	print("Mean speaker score for female competitors: " + str(round(female_rows['Speaks'].mean(), 2)))
+	print("Mean " + metric.lower() + " for female competitors: " + str(round(female_rows[metric].mean(), 2)))
 
 '''
 Takes in a dataframe of a speaker tab, augmented by gender classification.
-Prints out the median speaks of male and female speakers at the tournament.
+Prints out the median metric of male and female speakers at the tournament,
+where metric is a member of the set {'Speaks', 'Ranks'}.
 '''
-def median_speaks_by_gender(dataframe):
+def median_metric_by_gender(dataframe, metric):
 	male_rows = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Speaks'] != 0)]
-	print("Median speaker score for male competitors: " + str(round(male_rows['Speaks'].median(), 2)))
+	print("Median " + metric.lower() + " for male competitors: " + str(round(male_rows[metric].median(), 2)))
 	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Speaks'] != 0)]
-	print("Median speaker score for female competitors: " + str(round(female_rows['Speaks'].median(), 2)))
-
-'''
-Takes in a dataframe of a speaker tab, augmented by gender classification.
-Prints out the mean ranks of male and female speakers at the tournament.
-'''
-def mean_ranks_by_gender(dataframe):
-	male_rows = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Ranks'] != 0)]
-	print("Mean ranks for male competitors: " + str(round(male_rows['Ranks'].mean(), 2)))
-	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Ranks'] != 0)]
-	print("Mean ranks for female competitors: " + str(round(female_rows['Ranks'].mean(), 2)))
-
-'''
-Takes in a dataframe of a speaker tab, augmented by gender classification.
-Prints out the median ranks of male and female speakers at the tournament.
-'''
-def median_ranks_by_gender(dataframe):
-	male_rows = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Ranks'] != 0)]
-	print("Median ranks for male competitors: " + str(round(male_rows['Ranks'].median(), 2)))
-	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Ranks'] != 0)]
-	print("Median ranks for female competitors: " + str(round(female_rows['Ranks'].median(), 2)))
-
+	print("Median " + metric.lower() + " for female competitors: " + str(round(female_rows[metric].median(), 2)))
 
 '''
 Takes in a dataframe of a speaker tab, augmented by gender classification.
@@ -156,12 +137,16 @@ def main(filename):
 	df = read_csv_into_dataframe(filename)
 	add_genders(df)
 	num_competitors_by_gender(df)
-	mean_speaks_by_gender(df)
-	median_speaks_by_gender(df)
-	mean_ranks_by_gender(df)
-	median_ranks_by_gender(df)
+	print("")
+	mean_metric_by_gender(df, 'Speaks')
+	print("")
+	median_metric_by_gender(df, 'Speaks')
+	print("")
+	mean_metric_by_gender(df, 'Ranks')
+	print("")
+	median_metric_by_gender(df, 'Ranks')
+	print("")
 	bootstrap_p_value_speaks(df)
-
 
 if __name__ == "__main__":
 	try:
