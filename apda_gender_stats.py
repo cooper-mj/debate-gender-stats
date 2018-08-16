@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import random
 from tabulate import tabulate
 
 
@@ -88,6 +89,46 @@ def median_speaks_by_gender(dataframe):
 	female_rows = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Speaks'] != 0)]
 	print("Median speaker score for female competitors: " + str(round(female_rows['Speaks'].median(), 2)))
 
+'''
+Takes in a dataframe of a speaker tab, augmented by gender classification.
+Uses the bootstrap technique to calculate the probability that the differences
+in speaker scores between male and female speakeres at this tournament was due
+to chance (the p-value). If the p-value is less than 0.05, it indicates that there
+is a statistically significant difference between the performance of men and women
+at the tournament; if the p-value is greater than 0.05, it indicates that there is
+not a statistically significant difference in the performances of men and women at
+the tournament.
+'''
+def bootstrap_p_value_speaks(dataframe):
+	male_scores = dataframe[(dataframe['Gender'] == 'M') & (dataframe['Speaks'] != 0)]['Speaks'].tolist()
+	female_scores = dataframe[(dataframe['Gender'] == 'F') & (dataframe['Speaks'] != 0)]['Speaks'].tolist()
+
+	mean_diff = abs(np.mean(male_scores) - np.mean(female_scores))
+
+	num_males = len(male_scores)
+	num_females = len(female_scores)
+
+	universal = male_scores + female_scores
+
+	counter = 0
+
+	for i in range(10000):
+		male_resample = random.sample(universal, num_males)
+		female_resample = random.sample(universal, num_females)
+
+		male_mu = np.mean(male_resample)
+		female_mu = np.mean(female_resample)
+
+		if abs(male_mu - female_mu) > mean_diff:
+			counter += 1
+
+	p = counter / float(10000)
+
+	if p < 0.05:
+		print("There is a statistically significant difference in speaker scores by gender. In this distribution, p = " + str(p))
+	else:
+		print("There is not a statistically significant difference in speaker scores by gender. In this distribution, p = " + str(p))
+
 
 def main(filename):
 	df = read_csv_into_dataframe(filename)
@@ -95,6 +136,7 @@ def main(filename):
 	num_competitors_by_gender(df)
 	mean_speaks_by_gender(df)
 	median_speaks_by_gender(df)
+	bootstrap_p_value_speaks(df)
 
 
 if __name__ == "__main__":
