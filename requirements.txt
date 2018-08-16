@@ -1,0 +1,4 @@
+# List of packages required for debate-gender-stats project
+numpy==1.14.4
+pandas==0.22.0
+tabulate==0.8.2
