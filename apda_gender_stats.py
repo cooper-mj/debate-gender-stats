@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 import random
+import sys
 from tabulate import tabulate
 
 
@@ -163,4 +164,13 @@ def main(filename):
 
 
 if __name__ == "__main__":
-	main("debaters.csv")
+	try:
+		filename = sys.argv[1]
+		main(filename)
+	except IndexError:
+		# Error description since the user didn't enter a filename for the tab
+		print("")
+		print("Error. Please enter the name of the tab file you wish to analyze. E.g.")
+		print("    $ python3 apda_gender_stats.py [filename]")
+		print("")
+
