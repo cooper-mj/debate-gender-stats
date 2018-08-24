@@ -48,10 +48,6 @@ Where `[filename]` is the name of the debate tab file that you have just added t
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
-
 ## Contributing
 
 We would welcome suggestions and contributions!
